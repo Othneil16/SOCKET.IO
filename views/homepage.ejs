@@ -1,0 +1,202 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.socket.io/4.7.3/socket.io.min.js" integrity="sha384-+miq58Ltmjm+SSP5g8Ok6dpMO/6R4n8xe/x1Yj0Bdb9kiEz25LTnWv/GZQTRQamg" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1></h1>
+    <input type = "text" class="sendme">
+
+    <button onclick="chatFunc()">SEND CHAT</button>
+    <script>
+         const userName = prompt('what is your name')
+         document.querySelector("h1").innerHTML = `Hello ${userName}, welcome to my chat applcation`
+        const socket = io("http://localhost:1993").
+        socket.on("connection", (data)=>[
+           document.querySelector("h2").innerHTML = data
+        ])
+
+        const chatFunc = ()=>{
+            const messageToBeSent = document.querySelector(".sendme").value
+            socket.emit("message", "message from "+userName+": " + messageToBeSent
+        )}
+          
+        console.log(messageToBeSent);
+    </script>
+</body>
+</html>
+             -->
+        
+ <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <script src="https://cdn.socket.io/4.7.3/socket.io.min.js" integrity="sha384-+miq58Ltmjm+SSP5g8Ok6dpMO/6R4n8xe/x1Yj0Bdb9kiEz25LTnWv/GZQTRQamg" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .chat-message {
+            background-color: #f0f0f0;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+        }
+
+        #message-input {
+            width: 60%;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        #send-button {
+            padding: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Chat</h1>
+    <div id="chat-container"></div>
+    <input type="text" class="sendmsg" id="message-input">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const userAlias = prompt('Enter your username');
+        document.querySelector('h1').innerHTML = `Hello ${userAlias}, welcome to our chat application`;
+
+        const socket = io('http://localhost:1993');
+
+        socket.on('message', (data) => {
+            const chatContainer = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.textContent = data;
+            chatContainer.appendChild(messageDiv);
+        });
+
+        const sendMessage = () => {
+            const messageInput = document.getElementById('message-input');
+            const messageContent = messageInput.value;
+
+            if (messageContent.trim() !== '') {
+                socket.emit('message', `Message from ${userAlias}: ${messageContent}`);
+                messageInput.value = '';  // Clear the input field
+            }
+        };
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Chat</title>
+    <script src="https://cdn.socket.io/4.7.3/socket.io.min.js" integrity="sha384-+miq58Ltmjm+SSP5g8Ok6dpMO/6R4n8xe/x1Yj0Bdb9kiEz25LTnWv/GZQTRQamg" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: scroll;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-message {
+            background-color: #f0f0f0;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        #message-input {
+            width: 60%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #send-button {
+            padding: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Chat</h1>
+    <div id="chat-container"></div>
+    <input type="text" class="sendmsg" id="message-input">
+    <button onclick="sendMessage()" id="send-button">Send</button>
+
+    <script>
+        const userAlias = prompt('Enter your username');
+        document.querySelector('h1').innerHTML = `Hello ${userAlias}, welcome to our chat application`;
+
+        const socket = io('http://localhost:1993');
+
+        socket.on('message', (data) => {
+            const chatContainer = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.textContent = data;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
+        });
+
+        const sendMessage = () => {
+            const messageInput = document.getElementById('message-input');
+            const messageContent = messageInput.value;
+
+            if (messageContent.trim() !== '') {
+                socket.emit('message', `Message from ${userAlias}: ${messageContent}`);
+                messageInput.value = '';  // Clear the input field
+            }
+        };
+    </script>
+</body>
+</html>
