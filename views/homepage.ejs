@@ -177,7 +177,7 @@
         const userAlias = prompt('Enter your username');
         document.querySelector('h1').innerHTML = `Hello ${userAlias}, welcome to our chat application`;
 
-        const socket = io('http://localhost:1993');
+        const socket = io('https://othneil-chatapi.onrender.com');
 
         socket.on('message', (data) => {
             const chatContainer = document.getElementById('chat-container');
